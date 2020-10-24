@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Icon.png" type="Texture" id=2]
+
+[node name="Node2D" instance=ExtResource( 1 )]
+can_move = false
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="Label" parent="." index="1"]
+visible = true

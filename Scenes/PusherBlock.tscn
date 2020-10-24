@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/PusherBlock.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Block.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Icon.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Arrow.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/SteamBlock.png" type="Texture" id=5]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.993031, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=1]
+min_value = 0.2
+_data = [ Vector2( 0, 0.2 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 32, 1 )
+flag_disable_z = true
+spread = 30.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 600.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 1000.0
+linear_accel_random = 1.0
+scale = 0.2
+scale_curve = SubResource( 2 )
+color_ramp = SubResource( 5 )
+
+[node name="Node2D" groups=[
+"power_dependent",
+] instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+can_rotate = true
+can_activate = true
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 5 )
+
+[node name="DirectionIndicator" type="Sprite" parent="." index="3"]
+z_index = 1
+texture = ExtResource( 4 )
+offset = Vector2( 8, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Particles2D" type="Particles2D" parent="DirectionIndicator" index="0"]
+position = Vector2( 24, 0 )
+z_index = -2
+emitting = false
+amount = 101
+lifetime = 0.1
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
