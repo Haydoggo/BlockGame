@@ -6,21 +6,21 @@
 [ext_resource path="res://Sprites/Arrow.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/SteamBlock.png" type="Texture" id=5]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.993031, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="Curve" id=3]
 min_value = 0.2
 _data = [ Vector2( 0, 0.2 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=2]
-curve = SubResource( 1 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 32, 1 )
 flag_disable_z = true
@@ -33,15 +33,14 @@ orbit_velocity_random = 0.0
 linear_accel = 1000.0
 linear_accel_random = 1.0
 scale = 0.2
-scale_curve = SubResource( 2 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[node name="Node2D" groups=[
-"power_dependent",
-] instance=ExtResource( 2 )]
+[node name="Node2D" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 can_rotate = true
 can_activate = true
+type = "Pusher"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 5 )
@@ -62,5 +61,5 @@ amount = 101
 lifetime = 0.1
 one_shot = true
 explosiveness = 0.5
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
 texture = ExtResource( 3 )

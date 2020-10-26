@@ -14,7 +14,7 @@ func set_power(powered):
 	if powered and not extended:
 		emit_steam()
 		var welding = false
-		var target_block = blocks.get(location+direction)
+		var target_block = builder_node.blocks.get(location+direction)
 		if target_block != null:
 			welding = connected_blocks.find(target_block) != -1
 			if welding:
@@ -48,10 +48,10 @@ func set_power(powered):
 				attached_block = target_block
 			for block in checked_blocks:
 					block.location += move_dir
-			blocks.clear()
+			builder_node.blocks.clear()
 			for block in blocks_node.get_children():
 				if not block.is_queued_for_deletion():
-					blocks[block.location] = block
+					builder_node.blocks[block.location] = block
 			create_piston_rod(welding)
 		
 		# Extension failed
@@ -60,7 +60,7 @@ func set_power(powered):
 	
 	# Retract
 	elif extended and not powered:
-		var block_in_front = blocks.get(piston_rod.location + direction)
+		var block_in_front = builder_node.blocks.get(piston_rod.location + direction)
 		if block_in_front != null:
 			if block_in_front.connected_blocks.find(piston_rod) != -1:
 				attached_block = block_in_front
@@ -97,10 +97,10 @@ func set_power(powered):
 					attached_block = null
 				for block in checked_blocks:
 					block.location += move_dir
-				blocks.clear()
+				builder_node.blocks.clear()
 				for block in blocks_node.get_children():
 					if not (block.is_queued_for_deletion() or block == piston_rod):
-						blocks[block.location] = block
+						builder_node.blocks[block.location] = block
 			
 			# Retraction failed, replace piston rod
 			else:
@@ -117,7 +117,7 @@ func set_power(powered):
 		$Indicator.modulate = Color.red
 
 func create_piston_rod(welding: bool):
-	piston_rod = preload("res://Scenes/Block.tscn").instance()
+	piston_rod = Globals.block_res.instance()
 	get_parent().add_child(piston_rod)
 	connect_block(piston_rod)
 	piston_rod.force_set_location(location)
@@ -126,8 +126,8 @@ func create_piston_rod(welding: bool):
 	piston_rod.location += direction
 	piston_rod.z_index = -1
 	piston_rod.can_destroy = false
-	blocks[piston_rod.location] = piston_rod
-	var pushed_block = blocks.get(piston_rod.location + direction)
+	builder_node.blocks[piston_rod.location] = piston_rod
+	var pushed_block = builder_node.blocks.get(piston_rod.location + direction)
 	if pushed_block != null and welding:
 		piston_rod.connect_block(pushed_block)
 		attached_block = pushed_block
@@ -136,16 +136,14 @@ func retract_rod():
 #	return
 	var rod = Sprite.new()
 	rod.texture = load("res://Sprites/Block.png")
-	get_parent().get_parent().add_child(rod)
-	rod.position = get_parent().position + position + direction*tile_size
+	add_child(rod)
+	rod.position = direction*tile_size
 	rod.scale.y = 0.4
 	rod.rotation = direction.angle()
 	rod.z_index = -1
-	$Tween.interpolate_property(rod, "position", null, get_parent().position+position, tick_time)
+	$Tween.interpolate_property(rod, "position", null, Vector2.ZERO, tick_time)
 	$Tween.start()
-	print("foo")
-	yield(get_tree().create_timer(0.3), "timeout")
-	print("bar")
+	yield(get_tree().create_timer(tick_time), "timeout")
 	rod.queue_free()
 	
 
@@ -154,12 +152,12 @@ func delete():
 	if piston_rod != null:
 		for connected in piston_rod.connected_blocks:
 			connected.connected_blocks.erase(piston_rod)
-		blocks.erase(piston_rod.location)
+		builder_node.blocks.erase(piston_rod.location)
 		piston_rod.queue_free()
 	
 	for connected in connected_blocks:
 		connected.connected_blocks.erase(self)
-	blocks.erase(location)
+	builder_node.blocks.erase(location)
 	queue_free()
 
 func _ready():

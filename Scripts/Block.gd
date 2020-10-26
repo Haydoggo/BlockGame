@@ -1,18 +1,20 @@
 extends Node2D
 
-var tile_size := Globals.tile_size
-var blocks = Globals.blocks
+var tile_size = Globals.tile_size
+#var blocks = Globals.blocks
 var tick_time = Globals.tick_time
 
 onready var location : Vector2 setget set_location
 onready var old_location: Vector2
 var connected_blocks = []
-onready var blocks_node = get_node("/root/Builder/Blocks")
+onready var blocks_node = get_parent()
+onready var builder_node = blocks_node.get_parent()
 export var can_move = true
 export var can_rotate = false
 export var can_activate = false
 export var can_destroy = true
 export var conducting = false
+export var type = "Block"
 
 var frozen = false
 
@@ -48,7 +50,7 @@ func delete():
 	if can_destroy:
 		for connected in connected_blocks:
 			connected.connected_blocks.erase(self)
-		blocks.erase(location)
+		builder_node.blocks.erase(location)
 		queue_free()
 
 func move(amount: Vector2):
@@ -56,9 +58,9 @@ func move(amount: Vector2):
 	if move_recursive(checked_blocks, amount):
 		for block in checked_blocks:
 			block.location += amount
-		blocks.clear()
+		builder_node.blocks.clear()
 		for block in blocks_node.get_children():
-			blocks[block.location] = block
+			builder_node.blocks[block.location] = block
 		return true
 	else:
 		return false
@@ -81,7 +83,7 @@ func move_recursive(checked_blocks: Array, amount: Vector2):
 	
 	# Check if 
 	var target_location = self.location + amount
-	var block_at_target = blocks.get(target_location)
+	var block_at_target = builder_node.blocks.get(target_location)
 	if block_at_target != null:
 		if not block_at_target.move_recursive(checked_blocks, amount):
 			return false

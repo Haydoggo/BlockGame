@@ -20,7 +20,7 @@ func set_power(powered):
 	if powered:
 		emit_steam()
 		var checked_blocks = []
-		var target_block = blocks.get(old_location+direction)
+		var target_block = builder_node.blocks.get(old_location+direction)
 		if target_block ==  null:
 			return true
 		if target_block.move_recursive(checked_blocks, direction):
@@ -28,9 +28,9 @@ func set_power(powered):
 				return false
 			for block in checked_blocks:
 				block.location += direction
-			blocks.clear()
+			builder_node.blocks.clear()
 			for block in blocks_node.get_children():
-				blocks[block.location] = block
+				builder_node.blocks[block.location] = block
 			return true
 		else:
 			checked_blocks = []
@@ -39,9 +39,9 @@ func set_power(powered):
 					return false
 				for block in checked_blocks:
 					block.location += -direction
-				blocks.clear()
+				builder_node.blocks.clear()
 				for block in blocks_node.get_children():
-					blocks[block.location] = block
+					builder_node.blocks[block.location] = block
 				return true
 			else:
 				return false
