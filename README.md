@@ -1,7 +1,7 @@
 # BlockGame
 Check it out, it's my block game :)
 
-Game is in the exports folder if you don't want to build it yourself.
+If you want to try it, you can find releases [Here](https://github.com/Haydoggo/BlockGame/releases). (Just download the zip of the version you want)
 
 It's pretty bad right now so deal with it.
 
