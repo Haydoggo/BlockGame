@@ -24,6 +24,12 @@ func _process(_delta):
 	else:
 		modulate = Color.white
 
+func update_blocks():
+	builder_node.blocks.clear()
+	for block in get_parent().get_children():
+		if not block.is_queued_for_deletion():
+			builder_node.blocks[block.location] = block
+
 func connect_block(block):
 	if connected_blocks.find(block) == -1:
 		connected_blocks.append(block)
@@ -47,20 +53,17 @@ func force_set_location(val: Vector2):
 	position = location * tile_size
 
 func delete():
-	if can_destroy:
-		for connected in connected_blocks:
-			connected.connected_blocks.erase(self)
-		builder_node.blocks.erase(location)
-		queue_free()
+	for connected in connected_blocks:
+		connected.connected_blocks.erase(self)
+	builder_node.blocks.erase(location)
+	queue_free()
 
 func move(amount: Vector2):
 	var checked_blocks = []
 	if move_recursive(checked_blocks, amount):
 		for block in checked_blocks:
 			block.location += amount
-		builder_node.blocks.clear()
-		for block in blocks_node.get_children():
-			builder_node.blocks[block.location] = block
+		update_blocks()
 		return true
 	else:
 		return false
@@ -76,13 +79,14 @@ func move_recursive(checked_blocks: Array, amount: Vector2):
 	if frozen or not can_move:
 		return false
 	
+	var target_location = self.location + amount
+	if not Rect2(Vector2.ZERO, builder_node.extents).has_point(target_location):
+		return false
 	# Check if all connected blocks can move
 	for connected in connected_blocks:
 		if not connected.move_recursive(checked_blocks, amount):
 			return false
 	
-	# Check if 
-	var target_location = self.location + amount
 	var block_at_target = builder_node.blocks.get(target_location)
 	if block_at_target != null:
 		if not block_at_target.move_recursive(checked_blocks, amount):

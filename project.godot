@@ -124,4 +124,5 @@ pipette={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.397991, 0.424216, 0.486328, 1 )
 environment/default_environment="res://default_env.tres"

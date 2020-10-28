@@ -15,33 +15,30 @@ func set_dir(new_dir: Vector2):
 	$Tween.interpolate_property($DirectionIndicator, "rotation", null, end_angle, 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
 
+func push_block(target_block, dir:Vector2, checked_blocks=[]):
+	if target_block ==  null:
+		return true
+	if target_block.move_recursive(checked_blocks, dir):
+		if checked_blocks.find(self) != -1:
+			return false
+		for block in checked_blocks:
+			block.location += dir
+		return true
+	else:
+		checked_blocks = []
+		if move_recursive(checked_blocks, -dir):
+			if checked_blocks.find(target_block) != -1:
+				return false
+			for block in checked_blocks:
+				block.location += -dir
+			return true
+		else:
+			return false
+
 func set_power(powered):
 	power = powered
 	if powered:
 		emit_steam()
-		var checked_blocks = []
 		var target_block = builder_node.blocks.get(old_location+direction)
-		if target_block ==  null:
-			return true
-		if target_block.move_recursive(checked_blocks, direction):
-			if checked_blocks.find(self) != -1:
-				return false
-			for block in checked_blocks:
-				block.location += direction
-			builder_node.blocks.clear()
-			for block in blocks_node.get_children():
-				builder_node.blocks[block.location] = block
-			return true
-		else:
-			checked_blocks = []
-			if move_recursive(checked_blocks, -direction):
-				if checked_blocks.find(target_block) != -1:
-					return false
-				for block in checked_blocks:
-					block.location += -direction
-				builder_node.blocks.clear()
-				for block in blocks_node.get_children():
-					builder_node.blocks[block.location] = block
-				return true
-			else:
-				return false
+		push_block(target_block, direction)
+		update_blocks()

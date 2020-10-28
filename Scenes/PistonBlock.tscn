@@ -12,10 +12,12 @@ type = "Piston"
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
 
-[node name="Particles2D" parent="DirectionIndicator" index="0"]
-visible = false
-
 [node name="Indicator" type="Sprite" parent="." index="4"]
-modulate = Color( 1, 0, 0, 1 )
+modulate = Color( 1, 0.839216, 0, 1 )
 position = Vector2( -16, -16 )
 texture = ExtResource( 4 )
+
+[node name="GhostRod" type="Sprite" parent="." index="5"]
+scale = Vector2( 1, 0.3 )
+z_index = -1
+texture = ExtResource( 3 )
