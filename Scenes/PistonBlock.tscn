@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/PusherBlock.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/PistonBlock.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Block.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Indicator.png" type="Texture" id=4]
+
+[node name="Node2D" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+type = "Piston"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="Indicator" type="Sprite" parent="." index="4"]
+modulate = Color( 1, 0.839216, 0, 1 )
+position = Vector2( -16, -16 )
+texture = ExtResource( 4 )
+
+[node name="GhostRod" type="Sprite" parent="." index="5"]
+scale = Vector2( 1, 0.3 )
+z_index = -1
+texture = ExtResource( 3 )
