@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/PusherBlock.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/ConveryorBlock.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Arrow.png" type="Texture" id=3]
+
+[node name="PusherBlock" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+type = "Block"
+
+[node name="Sprite" parent="." index="0"]
+flip_v = true
+
+[node name="DirectionIndicator" parent="." index="3"]
+texture = null
+
+[node name="Particles2D" parent="DirectionIndicator" index="0"]
+rotation = 1.5708
+
+[node name="Arrow" type="Sprite" parent="DirectionIndicator" index="1"]
+position = Vector2( 19.0799, 1.78236 )
+rotation = 1.57079
+texture = ExtResource( 3 )

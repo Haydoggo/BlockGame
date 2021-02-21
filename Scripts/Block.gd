@@ -1,4 +1,5 @@
 extends Node2D
+class_name Block
 
 var tile_size = Globals.tile_size
 #var blocks = Globals.blocks
@@ -19,14 +20,8 @@ export var type = "Block"
 
 var frozen = false
 
-func _process(_delta):
-	4	
-	
-	pass
-#	if frozen:
-#		modulate = Color.red
-#	else:
-#		modulate = Color.white
+func _ready():
+	print(type)
 
 func update_blocks():
 	blocks.clear()
@@ -49,7 +44,7 @@ func disconnect_block(block):
 		block.connected_blocks.erase(self)
 		connected_blocks.erase(block)
 
-func get_all_connected(checked_blocks = []):
+func get_all_connected(checked_blocks = []) -> Array:
 	if checked_blocks.find(self) != -1:
 		return checked_blocks
 	else:

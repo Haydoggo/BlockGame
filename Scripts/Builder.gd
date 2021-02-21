@@ -131,9 +131,18 @@ func activate():
 			if block != null:
 				if block.type == target["type"]:
 					blocks_in_zone.append(block)
+		# Ensure all blocks in zone are connected to each other and to no other blocks
 		if blocks_in_zone.size() == goal.targets.size():
+			var connected_blocks = blocks_in_zone[0].get_all_connected() as Array
+			var unaccounted_blocks = connected_blocks.size()
 			for block in blocks_in_zone:
-				block.delete()
+				if connected_blocks.has(block):
+					unaccounted_blocks -= 1
+				else:
+					unaccounted_blocks += 1
+			if unaccounted_blocks == 0:
+				for block in blocks_in_zone:
+					block.delete()
 	
 	for source in $Sources.get_children():
 		var blocks_in_zone = []

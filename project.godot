@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Block",
+"language": "GDScript",
+"path": "res://Scripts/Block.gd"
+}, {
+"base": "Node2D",
+"class": "Goal",
+"language": "GDScript",
+"path": "res://Scripts/Goal.gd"
+} ]
 _global_script_class_icons={
-
+"Block": "",
+"Goal": ""
 }
 
 [application]
@@ -26,6 +37,10 @@ Globals="*res://Scripts/Globals.gd"
 [debug]
 
 settings/gdscript/max_call_stack=4096
+
+[display]
+
+window/dpi/allow_hidpi=true
 
 [gui]
 

@@ -22,8 +22,6 @@ func _ready():
 	timer.paused = !playing
 	timer.wait_time = tick_time * 1
 	OS.window_maximized =true
-	if OS.get_environment("USERNAME") == "Hayden":
-		OS.set_current_screen(1)
 	
 	var pos_arr = [Vector2(0,0), Vector2(tile_size*18, 0), Vector2(0, tile_size*18), Vector2(tile_size*18, tile_size*18)]
 	var ext_arr = [Vector2(16,16), Vector2(1024, 16), Vector2(16, 1024), Vector2(1024, 1024)]
@@ -34,7 +32,7 @@ func _ready():
 		build_zone.extents = ext_arr[i]
 		build_zone._ready()
 	
-	var goal = Globals.goal_res.instance()
+	var goal : Goal = Globals.goal_res.instance()
 	var source = Globals.goal_res.instance()
 	var block_list = [	[null, "Block", null],
 						["Block", "Power", "Block"],
@@ -42,6 +40,18 @@ func _ready():
 						[null, "Block", null]]
 	goal.add_blocks(block_list, Vector2(3,3))
 	source.add_blocks(block_list, Vector2(15,3))
+	
+	$BuildZones.get_child(3).get_node("Goals").add_child(goal)
+	$BuildZones.get_child(3).get_node("Sources").add_child(source)
+	
+	
+	goal = Globals.goal_res.instance()
+	source = Globals.goal_res.instance()
+	block_list = [["Block"]]
+	goal.add_blocks(block_list, Vector2(20,30))
+	goal.add_blocks(block_list, Vector2(21,30))
+	goal.add_blocks(block_list, Vector2(22,30))
+	source.add_blocks(block_list, Vector2(20,32))
 	
 	$BuildZones.get_child(3).get_node("Goals").add_child(goal)
 	$BuildZones.get_child(3).get_node("Sources").add_child(source)

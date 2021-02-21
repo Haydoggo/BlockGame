@@ -1,5 +1,5 @@
 extends "res://Scripts/Block.gd"
-onready var direction = Vector2.RIGHT setget set_dir
+onready var direction := Vector2.RIGHT setget set_dir
 onready var power = false setget set_power
 
 func emit_steam():

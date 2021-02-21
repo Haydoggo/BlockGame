@@ -10,3 +10,4 @@ func _ready():
 
 func button(type):
 	get_parent().block_type = type
+	print(type)

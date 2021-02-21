@@ -1,4 +1,6 @@
 extends Node2D
+class_name Goal
+
 var targets = []
 
 func add_block(type: String, location: Vector2):

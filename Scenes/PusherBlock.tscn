@@ -36,7 +36,7 @@ scale = 0.2
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
-[node name="Node2D" instance=ExtResource( 2 )]
+[node name="PusherBlock" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 can_rotate = true
 can_activate = true
