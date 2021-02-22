@@ -26,6 +26,11 @@ func _ready():
 	cursor.texture = block_type["tex"]
 	$Background/BackgroundTiles.rect_size = extents*tile_size
 
+func _input(event):
+	var block : Block = blocks.get(cursor_location)
+	if block != null:
+		block.get_input(event)
+
 func process():
 	block_type = block_types[get_node("/root/Game").block_type]
 	cursor.texture = block_type["tex"]
@@ -61,17 +66,6 @@ func process():
 			block.force_set_location(cursor_location)
 			blocks[cursor_location] = block
 	
-	if Input.is_action_just_pressed("rotate_block_CW"):
-		var block
-		block = blocks.get(cursor_location)
-		if block != null:
-			block.type = block_type["name"]
-			if block.can_rotate:
-				var rotation = PI/2
-				if Input.is_action_pressed("shift"):
-					rotation = -PI/2
-				block.direction = block.direction.rotated(rotation)
-	
 	if Input.is_action_just_pressed("ui_accept"):
 		if blocks.get(cursor_location) == null:
 			var block : Node2D
@@ -86,31 +80,6 @@ func process():
 			get_node("/root/Game").block_type = block.type
 			block_type = block_types[get_node("/root/Game").block_type]
 			cursor.texture = block_type["tex"]
-			
-	
-	if Input.is_action_just_pressed("ui_left"):
-		var block
-		block = blocks.get(cursor_location)
-		if block != null:
-			block.move(Vector2.LEFT)
-	
-	if Input.is_action_just_pressed("ui_right"):
-		var block
-		block = blocks.get(cursor_location)
-		if block != null:
-			block.move(Vector2.RIGHT)
-	
-	if Input.is_action_just_pressed("ui_up"):
-		var block
-		block = blocks.get(cursor_location)
-		if block != null:
-			block.move(Vector2.UP)
-	
-	if Input.is_action_just_pressed("ui_down"):
-		var block
-		block = blocks.get(cursor_location)
-		if block != null:
-			block.move(Vector2.DOWN)
 
 	if Input.is_action_pressed("right_click"):
 		var block

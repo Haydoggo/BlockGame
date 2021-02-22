@@ -6,6 +6,14 @@ func emit_steam():
 	$DirectionIndicator/Particles2D.restart()
 	$DirectionIndicator/Particles2D.emitting = true
 
+func get_input(event : InputEvent):
+	.get_input(event)
+	if event.is_action_pressed("rotate_block_CW"):
+		var rot = PI/2
+		if event.is_action_pressed("rotate_block_CCW"):
+			rot *= -1
+		self.direction = self.direction.rotated(rot)
+
 func set_dir(new_dir: Vector2):
 	$Tween.stop_all()
 	$DirectionIndicator.rotation = direction.angle()

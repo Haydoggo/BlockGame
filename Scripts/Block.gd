@@ -20,8 +20,15 @@ export var type = "Block"
 
 var frozen = false
 
-func _ready():
-	print(type)
+func get_input(event : InputEvent):
+	if event.is_action_pressed("ui_left"):
+		move(Vector2.LEFT)
+	if event.is_action_pressed("ui_right"):
+		move(Vector2.RIGHT)
+	if event.is_action_pressed("ui_up"):
+		move(Vector2.UP)
+	if event.is_action_pressed("ui_down"):
+		move(Vector2.DOWN)
 
 func update_blocks():
 	blocks.clear()
