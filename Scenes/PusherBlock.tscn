@@ -38,8 +38,8 @@ color_ramp = SubResource( 2 )
 
 [node name="PusherBlock" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-can_rotate = true
 can_activate = true
+can_destroy = true
 type = "Pusher"
 
 [node name="Sprite" parent="." index="0"]

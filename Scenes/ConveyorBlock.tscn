@@ -6,7 +6,7 @@
 
 [node name="PusherBlock" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-type = "Block"
+type = "Conveyor"
 
 [node name="Sprite" parent="." index="0"]
 flip_v = true

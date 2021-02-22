@@ -1,5 +1,5 @@
 extends "res://Scripts/Block.gd"
-onready var direction := Vector2.RIGHT setget set_dir
+onready var direction := Vector2.RIGHT
 onready var power = false setget set_power
 
 func emit_steam():
@@ -12,7 +12,7 @@ func get_input(event : InputEvent):
 		var rot = PI/2
 		if event.is_action_pressed("rotate_block_CCW"):
 			rot *= -1
-		self.direction = self.direction.rotated(rot)
+		set_dir(direction.rotated(rot))
 
 func set_dir(new_dir: Vector2):
 	if not can_rotate:

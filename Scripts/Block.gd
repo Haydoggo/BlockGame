@@ -11,11 +11,11 @@ var connected_blocks = []
 onready var blocks_node = get_parent()
 onready var builder_node = blocks_node.get_parent()
 onready var blocks = builder_node.blocks
-export var can_move = true
-export var can_rotate = false
-export var can_activate = false
-export var can_destroy = true
-export var conducting = false
+export var can_move : bool
+export var can_rotate : bool
+export var can_activate : bool
+export var can_destroy : bool
+export var conducting : bool
 export var type = "Block"
 
 var frozen = false

@@ -5,6 +5,7 @@
 
 [node name="Node2D" instance=ExtResource( 1 )]
 can_move = false
+can_destroy = true
 type = "Blocker"
 
 [node name="Sprite" parent="." index="0"]

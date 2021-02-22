@@ -5,6 +5,9 @@
 
 [node name="Block" type="Node2D"]
 script = ExtResource( 2 )
+can_move = true
+can_rotate = true
+can_destroy = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

@@ -12,11 +12,11 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 shadow_size = 8
 
-[sub_resource type="PanoramaSky" id=18]
+[sub_resource type="PanoramaSky" id=2]
 
-[sub_resource type="Environment" id=19]
+[sub_resource type="Environment" id=3]
 background_mode = 2
-background_sky = SubResource( 18 )
+background_sky = SubResource( 2 )
 
 [node name="Game" type="Node2D"]
 z_index = 1
@@ -143,5 +143,5 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 19 )
+environment = SubResource( 3 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

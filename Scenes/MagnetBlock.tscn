@@ -4,11 +4,11 @@
 [ext_resource path="res://Sprites/Block.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Magnet.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Indicator.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/MagnetBlock.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/MagnetBlock.gd" type="Script" id=5]
 
 [node name="MagnetBlock" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-type = "Block"
+type = "Magnet"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

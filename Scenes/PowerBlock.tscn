@@ -4,6 +4,7 @@
 [ext_resource path="res://Sprites/PowerBlock.png" type="Texture" id=2]
 
 [node name="PowerBlock" instance=ExtResource( 1 )]
+can_destroy = true
 conducting = true
 type = "Power"
 

@@ -10,6 +10,7 @@ var power_block_res = 		preload("res://Scenes/PowerBlock.tscn")
 var bolter_block_res = 		preload("res://Scenes/BolterBlock.tscn")
 var conveyor_block_res = 	preload("res://Scenes/ConveyorBlock.tscn")
 var magnet_block_res = 		preload("res://Scenes/MagnetBlock.tscn")
+var rotator_block_res = 		preload("res://Scenes/RotatorBlock.tscn")
 
 var goal_res = preload("res://Scenes/Goal.tscn")
 
@@ -26,5 +27,6 @@ onready var block_types = {	"Block":	{"res": block_res, 			"tex": block_tex_res,
 							"Piston":	{"res": piston_res,			"tex": piston_tex_res,"name":"Piston"},
 							"Power":	{"res": power_block_res, 	"tex": power_tex_res,	"name":"Power"},
 							"Bolter":	{"res": bolter_block_res,	"tex": piston_tex_res,		"name":"Bolter"},
-							"Conveyor":	{"res": conveyor_block_res,	"tex": piston_tex_res,		"name":"Conveyor"},
-							"Magnet":	{"res": magnet_block_res,	"tex": magnet_tex_res,		"name":"Magnet"}}
+							"Conveyor":	{"res": conveyor_block_res,	"tex": pusher_tex_res,		"name":"Conveyor"},
+							"Magnet":	{"res": magnet_block_res,	"tex": magnet_tex_res,		"name":"Magnet"},
+							"Rotator":	{"res": rotator_block_res,	"tex": piston_tex_res,		"name":"Rotator"}}
