@@ -94,6 +94,7 @@ func activate():
 	var powerable_blocks = []
 	
 	for goal in $Goals.get_children():
+		goal = goal as Goal
 		var blocks_in_zone = []
 		for target in goal.targets:
 			var block = blocks.get(target["location"])

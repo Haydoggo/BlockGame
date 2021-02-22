@@ -4,6 +4,7 @@ var on_cooldown = false
 var last_block
 
 func set_power(powered):
+	can_rotate = not powered
 	power = powered
 	if powered:
 		var target_block : Block = blocks.get(old_location + direction)

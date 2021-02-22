@@ -15,6 +15,8 @@ func get_input(event : InputEvent):
 		self.direction = self.direction.rotated(rot)
 
 func set_dir(new_dir: Vector2):
+	if not can_rotate:
+		return
 	$Tween.stop_all()
 	$DirectionIndicator.rotation = direction.angle()
 	var turn_angle = direction.angle_to(new_dir)

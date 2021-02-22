@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tile.png-70d4113d4aba0439883a8500fa5275c4.stex"
+path="res://.import/MagnetBlock.png-26f9b1cb22c700216741717eca17aaa7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tile.png"
-dest_files=[ "res://.import/Tile.png-70d4113d4aba0439883a8500fa5275c4.stex" ]
+source_file="res://Sprites/MagnetBlock.png"
+dest_files=[ "res://.import/MagnetBlock.png-26f9b1cb22c700216741717eca17aaa7.stex" ]
 
 [params]
 
