@@ -9,6 +9,7 @@ func _ready():
 		button.texture_normal = Globals.block_types[block_type]["tex"]
 		button.name = block_type
 		button.hint_tooltip = block_type
+		button
 		buttons.add_child(button)
 		
 #	var i = 0

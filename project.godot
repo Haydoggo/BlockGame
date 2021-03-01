@@ -45,6 +45,7 @@ window/dpi/allow_hidpi=true
 [gui]
 
 theme/use_hidpi=true
+timers/tooltip_delay_sec=0.2
 
 [input]
 
